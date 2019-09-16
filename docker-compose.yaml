@@ -1,0 +1,23 @@
+version: "3.6"
+
+services:
+
+  actions-aks-create-cluster:
+    image: sixeyed/actions-aks-create-cluster
+    build:
+      context: ./actions/aks-create-cluster
+
+  actions-aks-create-secret:
+    image: sixeyed/actions-aks-create-secret
+    build:
+      context: ./actions/aks-create-secret
+
+  actions-cosmosdb-create:
+    image: sixeyed/actions-cosmosdb-create-account
+    build:
+      context: ./actions/cosmosdb-create-account
+
+  actions-cosmosdb-get-connection-string:
+    image: sixeyed/actions-cosmosdb-get-connection-string
+    build:
+      context: ./actions/cosmosdb-get-connection-string
