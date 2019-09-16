@@ -21,3 +21,23 @@ services:
     image: sixeyed/actions-cosmosdb-get-connection-string
     build:
       context: ./actions/cosmosdb-get-connection-string
+
+  services-bulletin-board-app:
+    image: sixeyed/services-bulletin-board-app
+    build:
+      context: ./services/bulletin-board
+
+  services-bulletin-board-github:
+    image: sixeyed/services-bulletin-board-github
+    build:
+      context: ./services/github
+      
+  services-bulletin-board-mongo:
+    image: sixeyed/services-bulletin-board-mongo
+    build:
+      context: ./services/mongo
+
+  services-bulletin-board-no-op:
+    image: sixeyed/services-bulletin-board-no-op
+    build:
+      context: ./services/no-op

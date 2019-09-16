@@ -1,0 +1,25 @@
+name: Create AKS cluster
+
+on:
+  push:
+    paths:
+      - '.github/workflows/az-aks-create*.yaml'
+
+jobs:
+
+  build:
+ 
+    runs-on: ubuntu-latest
+ 
+    steps:
+    - name: Create AKS cluster -1
+      uses: 'docker://sixeyed/actions-aks-create-cluster:latest'
+      env:
+        AZURE_SP_NAME: {{`${{ secrets.AZURE_SP_NAME }}`}}
+        AZURE_SP_TENANT: {{`${{ secrets.AZURE_SP_TENANT }}`}}
+        AZURE_SP_PASSWORD: {{`${{ secrets.AZURE_SP_PASSWORD }}`}}
+        AZURE_SP_APP_ID: {{`${{ secrets.AZURE_SP_APP_ID }}`}}
+        AZURE_RESOURCE_GROUP: {{range .Services}}{{if eq "azure" .ID}}{{.Parameters.resourceGroup}}{{end}}{{end}}
+        AZURE_REGION: {{range .Services}}{{if eq "azure" .ID}}{{.Parameters.region}}{{end}}{{end}}
+        AKS_CLUSTER_NAME: {{range .Services}}{{if eq "aks" .ID}}{{.Parameters.clusterName}}{{end}}{{end}}
+        AKS_NODE_COUNT: {{range .Services}}{{if eq "aks" .ID}}{{.Parameters.nodeCount}}{{end}}{{end}}

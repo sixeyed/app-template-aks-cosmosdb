@@ -1,0 +1,149 @@
+apiVersion: v1alpha1
+generated: "2018-06-13T09:24:07.392654524Z"
+kind: RepositoryContent
+services:
+- apiVersion: v1alpha1
+  kind: ServiceTemplate
+  metadata:
+    name: azure
+    platforms:
+      - linux
+  spec:
+    description: Azure configuration
+    icon: https://raw.githubusercontent.com/sixeyed/app-template-azure/master/img/azure.png
+    source:
+      image: sixeyed/services-bulletin-board-no-op
+    title: Azure 
+    parameters:
+    - name: region
+      defaultValue: eastus
+      description: Azure region
+      type: string
+    - name: resourceGroup
+      description: Azure resource group name
+      type: string
+- apiVersion: v1alpha1
+  kind: ServiceTemplate
+  metadata:
+    name: aks
+    platforms:
+      - linux
+  spec:
+    description: AKS configuration
+    icon: https://raw.githubusercontent.com/sixeyed/app-template-azure/master/img/azure.png
+    source:
+      image: sixeyed/services-bulletin-board-no-op
+    title: Azure Kubernetes Service
+    parameters:
+    - name: clusterName
+      description: Cluster name
+      type: string
+    - name: nodeCount
+      type: enum
+      values:
+      - value: "2"
+        description: "2"
+      - value: "3"
+        description: "3"
+      - value: "5"
+        description: "5"
+- apiVersion: v1alpha1
+  kind: ServiceTemplate
+  metadata:
+    name: github
+    platforms:
+      - linux
+  spec:
+    description: GitHub Actions to create and deploy to AKS
+    icon: https://raw.githubusercontent.com/sixeyed/app-template-iot/master/img/github.png
+    source:
+      image: sixeyed/services-bulletin-board-github
+    title: GitHub Actions
+    parameters:
+    - name: username
+      description: Username
+      type: string
+    - name: repoName
+      description: Repository name
+      type: string
+- apiVersion: v1alpha1
+  kind: ServiceTemplate
+  metadata:
+    name: mongo
+    platforms:
+      - linux
+  spec:
+    description: A document-based distributed database
+    icon: https://scinfwe.blob.core.windows.net/drops/mongo.png
+    source:
+      image: sixeyed/services-bulletin-board-mongo
+    title: Mongo DB
+    parameters:
+    - name: accountName
+      description: Database account name
+      type: string
+    - name: version
+      description: Mongo version
+      type: enum
+      values:
+      - value: "4.2"
+        description: "4.2"
+    - name: externalPort
+      defaultValue: "27020"
+      description: External port      
+      type: hostPort
+- apiVersion: v1alpha1
+  kind: ServiceTemplate
+  metadata:
+    name: bulletinboard
+    platforms:
+      - linux
+  spec:
+    description: Node JS Bulletin Board sample app
+    icon: https://raw.githubusercontent.com/sixeyed/app-template-azure/master/img/nodejs.png
+    source:
+      image: sixeyed/services-bulletin-board-app
+    title: Bulletin Board
+    parameters:
+    - name: nodeVersion
+      description: Node version
+      type: enum
+      values:
+      - value: "10.15.3"
+        description: "10"
+      - value: "9"
+        description: "9"
+      - value: "8"
+        description: "8"
+    - name: externalPort
+      defaultValue: "8081"
+      description: External port      
+      type: hostPort
+templates:
+- apiVersion: v1alpha1
+  kind: ApplicationTemplate
+  metadata:
+    name: bulletin-board
+    platforms:
+    - linux
+  spec:
+    title: NodeJS with Mongo DB back-end managed on Azure
+    description: Bulletin Board sample app using CosmosDB & AKS
+    services:
+    - name: .github
+      serviceId: github
+    - name: azure
+      serviceId: azure
+      parameters:
+        region: eastus
+    - name: aks
+      serviceId: aks
+      parameters:
+        nodeCount: 2
+    - name: bulletin-board
+      serviceId: bulletinboard
+      parameters:
+        nodeVersion: 10.15.3 
+    - name: mongo
+      serviceId: mongo 
+    

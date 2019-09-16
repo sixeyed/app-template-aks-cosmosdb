@@ -1,0 +1,12 @@
+version: "3.6"
+
+services:
+  {{ .Name }}:
+    build: {{ .Name }}
+    ports:
+      - {{ .Parameters.externalPort }}:8080 
+    depends_on:
+      - mongo
+    secrets:
+      - source: mongo-connection-string
+        target: /app/config/mongo-connection-string

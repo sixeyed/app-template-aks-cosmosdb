@@ -1,0 +1,11 @@
+version: "3.6"
+
+services:
+  {{ .Name }}:
+    image: mongo:4.2
+    ports:
+      - {{ .Parameters.externalPort }}:27017
+
+secrets:
+  mongo-connection-string:
+    file: {{ .Name }}/secrets/mongo-connection-string

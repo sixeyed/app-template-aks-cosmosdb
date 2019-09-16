@@ -1,0 +1,22 @@
+name: Create CosmosDB Account
+
+on:
+  push:
+    paths:
+      - '.github/workflows/az-cosmosdb-create*.yaml'
+
+jobs:
+
+  build:
+ 
+    runs-on: ubuntu-latest
+ 
+    steps:
+    - uses: 'docker://sixeyed/actions-cosmosdb-create-account:latest'
+      env:
+        AZURE_SP_NAME: {{`${{ secrets.AZURE_SP_NAME }}`}}
+        AZURE_SP_TENANT: {{`${{ secrets.AZURE_SP_TENANT }}`}}
+        AZURE_SP_PASSWORD: {{`${{ secrets.AZURE_SP_PASSWORD }}`}}
+        AZURE_RESOURCE_GROUP: {{range .Services}}{{if eq "azure" .ID}}{{.Parameters.resourceGroup}}{{end}}{{end}}
+        AZURE_REGION: {{range .Services}}{{if eq "azure" .ID}}{{.Parameters.region}}{{end}}{{end}}
+        COSMOSDB_ACCOUNT_NAME: {{range .Services}}{{if eq "mongo" .ID}}{{.Parameters.accountName}}{{end}}{{end}}
