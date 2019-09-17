@@ -5,6 +5,8 @@ services:
     build: {{ .Name }}
     ports:
       - {{ .Parameters.externalPort }}:8080
+    environment:
+      - CONNECTION_STRING_PATH=/run/secrets/mongo-connection-string
     secrets:
       - source: mongo-connection-string
         target: mongo-connection-string
