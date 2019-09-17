@@ -3,41 +3,46 @@ version: "3.6"
 services:
 
   actions-aks-create-cluster:
-    image: sixeyed/actions-aks-create-cluster
+    image: sixeyed/actions-aks-create-cluster:1909
     build:
       context: ./actions/aks-create-cluster
 
   actions-aks-create-secret:
-    image: sixeyed/actions-aks-create-secret
+    image: sixeyed/actions-aks-create-secret:1909
     build:
       context: ./actions/aks-create-secret
 
+  actions-aks-create-secret:
+    image: sixeyed/actions-aks-stack-deploy:1909
+    build:
+      context: ./actions/aks-stack-deploy
+
   actions-cosmosdb-create:
-    image: sixeyed/actions-cosmosdb-create-account
+    image: sixeyed/actions-cosmosdb-create-account:1909
     build:
       context: ./actions/cosmosdb-create-account
 
   actions-cosmosdb-get-connection-string:
-    image: sixeyed/actions-cosmosdb-get-connection-string
+    image: sixeyed/actions-cosmosdb-get-connection-string:1909
     build:
       context: ./actions/cosmosdb-get-connection-string
 
   services-bulletin-board-app:
-    image: sixeyed/services-bulletin-board-app
+    image: sixeyed/services-bulletin-board-app:1909
     build:
       context: ./services/bulletin-board
 
   services-bulletin-board-github:
-    image: sixeyed/services-bulletin-board-github
+    image: sixeyed/services-bulletin-board-github:1909
     build:
       context: ./services/github
       
   services-bulletin-board-mongo:
-    image: sixeyed/services-bulletin-board-mongo
+    image: sixeyed/services-bulletin-board-mongo:1909
     build:
       context: ./services/mongo
 
   services-bulletin-board-no-op:
-    image: sixeyed/services-bulletin-board-no-op
+    image: sixeyed/services-bulletin-board-no-op:1909
     build:
       context: ./services/no-op

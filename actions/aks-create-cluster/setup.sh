@@ -47,3 +47,6 @@ kubectl apply -f /compose-etcd.yaml
 
 echo 'Installing Compose on Kubernetes'
 installer-linux -namespace=compose -etcd-servers=http://compose-etcd-client:2379 -tag="v0.4.23"
+
+echo 'Configuring RBAC for Kubernetes dashboard'
+kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard

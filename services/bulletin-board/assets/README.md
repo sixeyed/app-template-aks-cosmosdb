@@ -2,7 +2,7 @@
 
 Welcome to the Bulletin Board sample! It's a simple NodeJS application which uses Vue for the front end, Express for the backend, and MongoDB for storage.
 
-This source code was scaffolded by a [Docker Application Template](https://github.com/sixeyed/TODO), together with an application manifest to deploy the app: [docker-compose.yaml](../docker-compose.yaml).
+This source code was scaffolded by a [Docker Application Template](https://github.com/sixeyed/app-template-aks-cosmosdb), together with an application manifest to deploy the app: [docker-compose.yaml](../docker-compose.yaml).
 
 > The output also includes GitHub actions for creating a Kubernetes cluster and a CosmosDB database in Azure, and for deploying your demo app to the cluster.
 
@@ -25,7 +25,7 @@ Push the code to GitHub. This will start an action to create your Azure resource
 git push -u origin master
 ```
 
-The actions use secrets from your repo to connect to Azure. Then it:
+The actions uses secrets from your repo to connect to Azure. Then it:
 
 - creates an AKS cluster 
 - deploys [Helm](https://helm.sh) on the cluster
@@ -62,9 +62,9 @@ You can edit those files and click _Restart_ in Application Designer to update y
 
 ## Deploy to Kubernetes
 
-Your AKS cluster has been provisioned with [Compose on Kubernetes](https://github.com/docker/compose-on-kubernetes), so you can use **the exact same** [docker-compose.yaml](../docker-compose.yaml) manifest to deploy to GKE.
+Your AKS cluster has been provisioned with [Compose on Kubernetes](https://github.com/docker/compose-on-kubernetes), so you can use **the exact same** Docker Compose format to deploy to AKS.
 
-And your GitHub repo has another Action which runs to deploy your app when you push changes.
+And your GitHub repo has another Action which deployw your app using the generated [docker-compose.production.yaml](../docker-compose.production.yaml) file when you push changes.
 
 Now that you've edited the UI, push your changes to deploy the app to AKS:
 
@@ -74,7 +74,25 @@ git commit -m 'I edited this myself'
 git push origin master
 ```
 
-## TODO - link to portal/get load balancer IP
+## Browse to the app on AKS
+
+Your app is running now and you can browse to the Kubernetes dashboard on AKS to see the deployment.
+
+Launch an [Azure Cloud Shell](https://shell.azure.com) session, then run the AKS dashboard:
+
+```
+az aks browse --resource-group {{range .Services}}{{if eq "azure" .ID}}{{.Parameters.resourceGroup}}{{end}}{{end}} --name {{range .Services}}{{if eq "aks" .ID}}{{.Parameters.clusterName}}{{end}}{{end}}
+```
+
+From here you can see:
+
+- the deployment generated from the Docker Compose file
+- the secret containing the CosmosDB connection string
+- the pod running the demo app
+- the service with an external endpoint to access the app
+
+You can make changes to the code locally, push to GitHub your changes will be deployed to AKS.
+
 
 ### Credits
 

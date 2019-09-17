@@ -11,11 +11,12 @@ Docker Application Template for deploying a CosmosDB-powered app onto Azure Kube
 2. Create a Service Principal in Azure. You can use the [Azure CLI](https://github.com/Azure/azure-cli):
 
 ```
-az ad sp create-for-rbac --name AppTemplate 
+az ad sp create-for-rbac --name http://app-template 
 ```
 
 3. Your GitHub account needs to be approved for [GitHub Actions](https://help.github.com/en/articles/about-github-actions) (currently in beta). Then create an empty repo and set the following secrets (under _Settings...Secrets_):
 
+- `AZURE_SP_APP_ID` - Service Principal application ID
 - `AZURE_SP_NAME` - Service Principal name
 - `AZURE_SP_TENANT` - Service Principal tenant
 - `AZURE_SP_PASSWORD` - Service Principal password

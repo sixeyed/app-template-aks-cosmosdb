@@ -12,7 +12,7 @@ jobs:
 
     - name: Get connection string
       id: get-connection-string
-      uses: 'docker://sixeyed/actions-cosmosdb-get-connection-string:latest'
+      uses: 'docker://sixeyed/actions-cosmosdb-get-connection-string:1909'
       env:
         AZURE_SP_NAME: {{`${{ secrets.AZURE_SP_NAME }}`}}
         AZURE_SP_TENANT: {{`${{ secrets.AZURE_SP_TENANT }}`}}
@@ -21,7 +21,7 @@ jobs:
         COSMOSDB_ACCOUNT_NAME: {{range .Services}}{{if eq "mongo" .ID}}{{.Parameters.accountName}}{{end}}{{end}}
 
     - name: Write Kubernetes secret 
-      uses: 'docker://sixeyed/actions-aks-create-secret:latest'
+      uses: 'docker://sixeyed/actions-aks-create-secret:1909'
       env:
         AZURE_SP_NAME: {{`${{ secrets.AZURE_SP_NAME }}`}}
         AZURE_SP_TENANT: {{`${{ secrets.AZURE_SP_TENANT }}`}}

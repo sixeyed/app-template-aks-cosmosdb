@@ -12,7 +12,7 @@ services:
     description: Azure configuration
     icon: https://raw.githubusercontent.com/sixeyed/app-template-aks-cosmosdb/master/img/azure.png
     source:
-      image: sixeyed/services-bulletin-board-no-op
+      image: sixeyed/services-bulletin-board-no-op:1909
     title: Azure 
     parameters:
     - name: region
@@ -32,7 +32,7 @@ services:
     description: AKS configuration
     icon: https://raw.githubusercontent.com/sixeyed/app-template-aks-cosmosdb/master/img/aks.png
     source:
-      image: sixeyed/services-bulletin-board-no-op
+      image: sixeyed/services-bulletin-board-no-op:1909
     title: Azure Kubernetes Service
     parameters:
     - name: clusterName
@@ -57,7 +57,7 @@ services:
     description: GitHub Actions to create and deploy to AKS
     icon: https://raw.githubusercontent.com/sixeyed/app-template-aks-cosmosdb/master/img/github.png
     source:
-      image: sixeyed/services-bulletin-board-github
+      image: sixeyed/services-bulletin-board-github:1909
     title: GitHub Actions
     parameters:
     - name: username
@@ -76,7 +76,7 @@ services:
     description: A document-based distributed database
     icon: https://raw.githubusercontent.com/sixeyed/app-template-aks-cosmosdb/master/img/mongo.png
     source:
-      image: sixeyed/services-bulletin-board-mongo
+      image: sixeyed/services-bulletin-board-mongo:1909
     title: Mongo DB
     parameters:
     - name: accountName
@@ -102,7 +102,7 @@ services:
     description: Node JS Bulletin Board sample app
     icon: https://raw.githubusercontent.com/sixeyed/app-template-aks-cosmosdb/master/img/nodejs.png
     source:
-      image: sixeyed/services-bulletin-board-app
+      image: sixeyed/services-bulletin-board-app:1909
     title: Bulletin Board
     parameters:
     - name: nodeVersion

@@ -1,0 +1,33 @@
+name: Deploy to GKE
+
+on: push
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+    
+    - name: Login to Docker Hub
+      uses: azure/container-actions/docker-login@master
+      with:
+        login-server: docker.io
+        username: {{`${{ secrets.DOCKER_HUB_USERNAME }}`}}
+        password: {{`${{ secrets.DOCKER_HUB_PASSWORD }}`}}
+    
+    - name: Build and push Docker images
+      run: |
+        docker-compose build
+        docker-compose push
+        
+    - name: Deploy from Compose to Kubernetes
+      uses: 'docker://sixeyed/actions-aks-stack-deploy:1909'          
+      env:
+        AZURE_SP_NAME: {{`${{ secrets.AZURE_SP_NAME }}`}}
+        AZURE_SP_TENANT: {{`${{ secrets.AZURE_SP_TENANT }}`}}
+        AZURE_SP_PASSWORD: {{`${{ secrets.AZURE_SP_PASSWORD }}`}}
+        AZURE_RESOURCE_GROUP: {{range .Services}}{{if eq "azure" .ID}}{{.Parameters.resourceGroup}}{{end}}{{end}}
+        AKS_CLUSTER_NAME: {{range .Services}}{{if eq "aks" .ID}}{{.Parameters.clusterName}}{{end}}{{end}}
+        DOCKER_COMPOSE_PATH: '/github/workspace/docker-compose.production.yaml'
+        DOCKER_STACK_NAME: bulletin-board

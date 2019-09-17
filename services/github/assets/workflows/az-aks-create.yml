@@ -13,7 +13,7 @@ jobs:
  
     steps:
     - name: Create AKS cluster -1
-      uses: 'docker://sixeyed/actions-aks-create-cluster:latest'
+      uses: 'docker://sixeyed/actions-aks-create-cluster:1909'
       env:
         AZURE_SP_NAME: {{`${{ secrets.AZURE_SP_NAME }}`}}
         AZURE_SP_TENANT: {{`${{ secrets.AZURE_SP_TENANT }}`}}

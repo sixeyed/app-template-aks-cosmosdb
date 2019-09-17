@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
  
     steps:
-    - uses: 'docker://sixeyed/actions-cosmosdb-create-account:latest'
+    - uses: 'docker://sixeyed/actions-cosmosdb-create-account:1909'
       env:
         AZURE_SP_NAME: {{`${{ secrets.AZURE_SP_NAME }}`}}
         AZURE_SP_TENANT: {{`${{ secrets.AZURE_SP_TENANT }}`}}
