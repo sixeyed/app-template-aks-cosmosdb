@@ -28,7 +28,7 @@ jobs:
         AZURE_SP_NAME: {{`${{ secrets.AZURE_SP_NAME }}`}}
         AZURE_SP_TENANT: {{`${{ secrets.AZURE_SP_TENANT }}`}}
         AZURE_SP_PASSWORD: {{`${{ secrets.AZURE_SP_PASSWORD }}`}}
-        AZURE_RESOURCE_GROUP: {{range .Services}}{{if eq "azure" .ID}}{{.Parameters.region}}{{end}}{{end}}
+        AZURE_RESOURCE_GROUP: {{range .Services}}{{if eq "azure" .ID}}{{.Parameters.resourceGroup}}{{end}}{{end}}
         COSMOSDB_ACCOUNT_NAME: {{range .Services}}{{if eq "mongo" .ID}}{{.Parameters.accountName}}{{end}}{{end}}
 
     - name: Write Kubernetes secret 
