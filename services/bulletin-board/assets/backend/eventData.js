@@ -72,7 +72,7 @@ class EventData {
 
     async ensureCollection() {
         if (this.collection == null) {
-            var connectionString = await fsPromises.readFile("/app/config/mongo-connection-string", "utf8");
+            var connectionString = await fsPromises.readFile(process.env.CONNECTION_STRING_PATH, "utf8");
             const client = new MongoClient(connectionString, { useNewUrlParser: true });
             await client.connect();
             this.database = client.db(dbConfig.database.name);

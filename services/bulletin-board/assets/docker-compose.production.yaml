@@ -7,4 +7,4 @@ services:
       - {{ .Parameters.externalPort }}:8080
     secrets:
       - source: mongo-connection-string
-        target: /app/config/mongo-connection-string
+        target: mongo-connection-string

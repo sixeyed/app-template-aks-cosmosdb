@@ -55,7 +55,7 @@ services:
       - linux
   spec:
     description: GitHub Actions to create and deploy to AKS
-    icon: https://raw.githubusercontent.com/sixeyed/app-template-iot/master/img/github.png
+    icon: https://raw.githubusercontent.com/sixeyed/app-template-aks-cosmosdb/master/img/github.png
     source:
       image: sixeyed/services-bulletin-board-github
     title: GitHub Actions
@@ -74,7 +74,7 @@ services:
       - linux
   spec:
     description: A document-based distributed database
-    icon: https://raw.githubusercontent.com/sixeyed/app-template-iot/master/img/mongo.png
+    icon: https://raw.githubusercontent.com/sixeyed/app-template-aks-cosmosdb/master/img/mongo.png
     source:
       image: sixeyed/services-bulletin-board-mongo
     title: Mongo DB

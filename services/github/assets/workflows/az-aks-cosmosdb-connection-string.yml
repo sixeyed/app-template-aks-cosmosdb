@@ -29,5 +29,5 @@ jobs:
         AZURE_RESOURCE_GROUP: {{range .Services}}{{if eq "azure" .ID}}{{.Parameters.resourceGroup}}{{end}}{{end}}
         AKS_CLUSTER_NAME: {{range .Services}}{{if eq "aks" .ID}}{{.Parameters.clusterName}}{{end}}{{end}}
         AKS_SECRET_NAME: mongo-connection-string
-        AKS_SECRET_FILE_NAME: mongo-connection-string
+        AKS_SECRET_FILE_NAME: file
         AKS_SECRET_FILE_VALUE: {{`${{ steps.get-connection-string.outputs.connectionString }}`}}

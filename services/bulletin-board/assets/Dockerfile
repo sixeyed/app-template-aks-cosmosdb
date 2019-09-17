@@ -9,6 +9,7 @@ FROM node:{{ .Parameters.nodeVersion }}-stretch
 
 EXPOSE 8080
 CMD [ "node", "server.js" ]
+ENV CONNECTION_STRING_PATH=/app/config/mongo-connection-string
 
 USER node
 HEALTHCHECK --interval=5s --timeout=10s --start-period=15s \

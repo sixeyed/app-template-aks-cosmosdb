@@ -38,8 +38,7 @@ new Vue({
       }
     },
 
-    deleteEvent: function (id) {
-      if (confirm('Are you sure you want to delete this event?')) {        
+    deleteEvent: function (id) {     
         this.$http.delete('api/events/' + id)
           .success(function (res) {
             console.log(res);            
@@ -50,7 +49,6 @@ new Vue({
           .error(function (err) {
             console.log(err);
           });
-      }
     }
   }
 });
