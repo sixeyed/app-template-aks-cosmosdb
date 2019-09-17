@@ -10,7 +10,7 @@ services:
       - linux
   spec:
     description: Azure configuration
-    icon: https://raw.githubusercontent.com/sixeyed/app-template-azure/master/img/azure.png
+    icon: https://raw.githubusercontent.com/sixeyed/app-template-aks-cosmosdb/master/img/azure.png
     source:
       image: sixeyed/services-bulletin-board-no-op
     title: Azure 
@@ -30,7 +30,7 @@ services:
       - linux
   spec:
     description: AKS configuration
-    icon: https://raw.githubusercontent.com/sixeyed/app-template-azure/master/img/azure.png
+    icon: https://raw.githubusercontent.com/sixeyed/app-template-aks-cosmosdb/master/img/aks.png
     source:
       image: sixeyed/services-bulletin-board-no-op
     title: Azure Kubernetes Service
@@ -74,7 +74,7 @@ services:
       - linux
   spec:
     description: A document-based distributed database
-    icon: https://scinfwe.blob.core.windows.net/drops/mongo.png
+    icon: https://raw.githubusercontent.com/sixeyed/app-template-iot/master/img/mongo.png
     source:
       image: sixeyed/services-bulletin-board-mongo
     title: Mongo DB
@@ -100,7 +100,7 @@ services:
       - linux
   spec:
     description: Node JS Bulletin Board sample app
-    icon: https://raw.githubusercontent.com/sixeyed/app-template-azure/master/img/nodejs.png
+    icon: https://raw.githubusercontent.com/sixeyed/app-template-aks-cosmosdb/master/img/nodejs.png
     source:
       image: sixeyed/services-bulletin-board-app
     title: Bulletin Board

@@ -1,0 +1,5 @@
+version: "3.6"
+
+secrets:
+  mongo-connection-string:
+    external: true
