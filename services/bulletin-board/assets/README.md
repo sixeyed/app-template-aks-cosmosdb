@@ -19,18 +19,18 @@ git commit -m "A template built all this!"
 git remote add origin {{range .Services}}{{if eq "github" .ID}}https://github.com/{{.Parameters.username}}/{{.Parameters.repoName}}.git{{end}}{{end}}
 ```
 
-Push the code to GitHub. This will start an action to create your Azure resources:
+Push the code to GitHub. This will start workflows to create your Azure resources:
 
 ```
 git push -u origin master
 ```
 
-The actions uses secrets from your repo to connect to Azure. Then it:
+[You can check on the workflows here]({{range .Services}}{{if eq "github" .ID}}https://github.com/{{.Parameters.username}}/{{.Parameters.repoName}}/actions{{end}}{{end}}). The actions use secrets from your repo to connect to Azure. Then they:
 
-- creates an AKS cluster 
-- deploys [Helm](https://helm.sh) on the cluster
-- deploys [Compose on Kubernetes](https://github.com/docker/compose-on-kubernetes) on the cluster
-- creates a CosmosDB account configured to use the Mongo API
+- create an AKS cluster 
+- deploy [Helm](https://helm.sh) on the cluster
+- deploy [Compose on Kubernetes](https://github.com/docker/compose-on-kubernetes) on the cluster
+- create a CosmosDB account configured to use the Mongo API
 
 ## Meanwhile... run the app locally
 
@@ -91,7 +91,7 @@ From here you can see:
 - the pod running the demo app
 - the service with an external endpoint to access the app
 
-You can make changes to the code locally, push to GitHub your changes will be deployed to AKS.
+> You can continue to work on the code locally, push to GitHub and your changes will be deployed to AKS.
 
 
 ### Credits

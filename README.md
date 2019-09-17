@@ -18,7 +18,7 @@ az ad sp create-for-rbac --name http://app-template
 
 - `AZURE_SP_APP_ID` - Service Principal application ID
 - `AZURE_SP_NAME` - Service Principal name
-- `AZURE_SP_TENANT` - Service Principal tenant
 - `AZURE_SP_PASSWORD` - Service Principal password
+- `AZURE_SP_TENANT` - Service Principal tenant
 - `DOCKER_HUB_USERNAME` - Docker Hub username
 - `DOCKER_HUB_PASSWORD` - Docker Hub password

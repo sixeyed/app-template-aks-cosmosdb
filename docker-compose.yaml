@@ -12,7 +12,7 @@ services:
     build:
       context: ./actions/aks-create-secret
 
-  actions-aks-create-secret:
+  actions-aks-create-stack-deploy:
     image: sixeyed/actions-aks-stack-deploy:1909
     build:
       context: ./actions/aks-stack-deploy

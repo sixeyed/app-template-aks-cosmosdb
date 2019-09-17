@@ -3,7 +3,7 @@ name: Create CosmosDB Account
 on:
   push:
     paths:
-      - '.github/workflows/az-cosmosdb-create*.yaml'
+      - '.github/workflows/az*-create.yml'
 
 jobs:
 

@@ -3,7 +3,7 @@ name: Create AKS cluster
 on:
   push:
     paths:
-      - '.github/workflows/az-aks-create*.yaml'
+      - '.github/workflows/az*-create.yml'
 
 jobs:
 

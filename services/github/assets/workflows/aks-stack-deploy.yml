@@ -1,4 +1,4 @@
-name: Deploy to GKE
+name: Deploy to AKS
 
 on: push
 
@@ -20,6 +20,28 @@ jobs:
       run: |
         docker-compose build
         docker-compose push
+
+    - name: Get CosmosDB connection string
+      id: get-connection-string
+      uses: 'docker://sixeyed/actions-cosmosdb-get-connection-string:1909'
+      env:
+        AZURE_SP_NAME: {{`${{ secrets.AZURE_SP_NAME }}`}}
+        AZURE_SP_TENANT: {{`${{ secrets.AZURE_SP_TENANT }}`}}
+        AZURE_SP_PASSWORD: {{`${{ secrets.AZURE_SP_PASSWORD }}`}}
+        AZURE_RESOURCE_GROUP: {{range .Services}}{{if eq "azure" .ID}}{{.Parameters.region}}{{end}}{{end}}
+        COSMOSDB_ACCOUNT_NAME: {{range .Services}}{{if eq "mongo" .ID}}{{.Parameters.accountName}}{{end}}{{end}}
+
+    - name: Write Kubernetes secret 
+      uses: 'docker://sixeyed/actions-aks-create-secret:1909'
+      env:
+        AZURE_SP_NAME: {{`${{ secrets.AZURE_SP_NAME }}`}}
+        AZURE_SP_TENANT: {{`${{ secrets.AZURE_SP_TENANT }}`}}
+        AZURE_SP_PASSWORD: {{`${{ secrets.AZURE_SP_PASSWORD }}`}}
+        AZURE_RESOURCE_GROUP: {{range .Services}}{{if eq "azure" .ID}}{{.Parameters.resourceGroup}}{{end}}{{end}}
+        AKS_CLUSTER_NAME: {{range .Services}}{{if eq "aks" .ID}}{{.Parameters.clusterName}}{{end}}{{end}}
+        AKS_SECRET_NAME: mongo-connection-string
+        AKS_SECRET_FILE_NAME: file
+        AKS_SECRET_FILE_VALUE: {{`${{ steps.get-connection-string.outputs.connectionString }}`}}
         
     - name: Deploy from Compose to Kubernetes
       uses: 'docker://sixeyed/actions-aks-stack-deploy:1909'          

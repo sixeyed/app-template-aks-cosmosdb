@@ -19,4 +19,7 @@ az aks get-credentials --resource-group $AZURE_RESOURCE_GROUP --name $AKS_CLUSTE
 echo "Creating secret: $AKS_SECRET_NAME"
 mkdir -p /tmp/aks
 echo $AKS_SECRET_FILE_VALUE > /tmp/aks/$AKS_SECRET_FILE_NAME
-kubectl create secret generic $AKS_SECRET_NAME --from-file=/tmp/aks/$AKS_SECRET_FILE_NAME
+
+kubectl create secret generic $AKS_SECRET_NAME \
+  --from-file=/tmp/aks/$AKS_SECRET_FILE_NAME \
+  --dry-run -o yaml | kubectl apply -f -
